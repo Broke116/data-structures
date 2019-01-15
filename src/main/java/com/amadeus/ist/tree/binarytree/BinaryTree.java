@@ -1,7 +1,10 @@
 package com.amadeus.ist.tree.binarytree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class BinaryTree {
-    class Node {
+    static class Node {
         int data;
         Node left;
         Node right;
@@ -34,7 +37,9 @@ class BinaryTree {
     }
 
     private Node root;
+    private List<Integer> traversal = new ArrayList<Integer>();
 
+    // used for returning the size of a binary tree
     int getSize() {
         return getSizeRecursive(root);
     }
@@ -46,6 +51,7 @@ class BinaryTree {
         return 1 + getSizeRecursive(root.left) + getSizeRecursive(root.right);
     }
 
+    // used for returning the maximum height of a binary tree
     int height() {
         return recursiveHeight(root);
     }
@@ -63,6 +69,7 @@ class BinaryTree {
         return (leftHeight > rightHeight) ? leftHeight : rightHeight;
     }
 
+    // add a new element for binary tree
     void addElement(int value) {
         root = addRecursive(root, value);
     }
@@ -82,6 +89,7 @@ class BinaryTree {
         return root;
     }
 
+    // search an element of binary tree
     boolean searchElement(int value) {
         Node node = searchRecursive(root, value);
         return node != null;
@@ -98,5 +106,22 @@ class BinaryTree {
             return searchRecursive(root.left, value);
 
         return searchRecursive(root.right, value);
+    }
+
+    // DFS - Pre order traversal - recursive approach
+
+    List<Integer> preOrderTraversal() {
+        preOrderTraversalRecursive(root);
+        return traversal;
+    }
+
+    private void preOrderTraversalRecursive(Node root){
+        traversal.add(root.data);
+
+        if (root.left != null)
+            preOrderTraversalRecursive(root.left);
+
+        if (root.right != null)
+            preOrderTraversalRecursive(root.right);
     }
 }
