@@ -31,4 +31,14 @@ public class BinaryTreeTest {
         Assert.assertFalse(binaryTree.searchElement(8));
         Assert.assertTrue(binaryTree.searchElement(7));
     }
+
+    @Test
+    public void findHeightOfBinaryTree() {
+        binaryTree.addElement(10);
+        binaryTree.addElement(15);
+        binaryTree.addElement(5);
+        binaryTree.addElement(8);
+
+        Assert.assertEquals(2, binaryTree.height());
+    }
 }

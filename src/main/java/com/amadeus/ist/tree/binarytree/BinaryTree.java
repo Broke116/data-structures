@@ -1,7 +1,5 @@
 package com.amadeus.ist.tree.binarytree;
 
-import java.util.Objects;
-
 class BinaryTree {
     class Node {
         int data;
@@ -46,6 +44,23 @@ class BinaryTree {
             return 0;
 
         return 1 + getSizeRecursive(root.left) + getSizeRecursive(root.right);
+    }
+
+    int height() {
+        return recursiveHeight(root);
+    }
+
+    private int recursiveHeight(Node root){
+        int leftHeight = 0;
+        int rightHeight = 0;
+
+        if (root.right != null)
+            rightHeight = 1 + recursiveHeight(root.right);
+
+        if (root.left != null)
+            leftHeight = 1 + recursiveHeight(root.left);
+
+        return (leftHeight > rightHeight) ? leftHeight : rightHeight;
     }
 
     void addElement(int value) {
