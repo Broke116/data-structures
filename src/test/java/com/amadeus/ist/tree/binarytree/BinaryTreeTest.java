@@ -25,4 +25,10 @@ public class BinaryTreeTest {
         binaryTree.addElement(5);
         Assert.assertEquals(2, binaryTree.getSize());
     }
+
+    @Test
+    public void searchElement() {
+        Assert.assertFalse(binaryTree.searchElement(8));
+        Assert.assertTrue(binaryTree.searchElement(7));
+    }
 }

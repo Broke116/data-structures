@@ -1,5 +1,7 @@
 package com.amadeus.ist.tree.binarytree;
 
+import java.util.Objects;
+
 class BinaryTree {
     class Node {
         int data;
@@ -10,6 +12,26 @@ class BinaryTree {
             this.data = data;
             this.left = null;
             this.right = null;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Node node = (Node) o;
+
+            if (data != node.data) return false;
+            if (left != null ? !left.equals(node.left) : node.left != null) return false;
+            return right != null ? right.equals(node.right) : node.right == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = data;
+            result = 31 * result + (left != null ? left.hashCode() : 0);
+            result = 31 * result + (right != null ? right.hashCode() : 0);
+            return result;
         }
     }
 
@@ -43,5 +65,23 @@ class BinaryTree {
             root.right = addRecursive(root.right, value);
 
         return root;
+    }
+
+    boolean searchElement(int value) {
+        Node node = searchRecursive(root, value);
+        return node != null;
+    }
+
+    private Node searchRecursive(Node root, int value) {
+        if (root == null)
+            return root;
+
+        if (root.data == value)
+            return root;
+
+        if (root.data > value)
+            return searchRecursive(root.left, value);
+
+        return searchRecursive(root.right, value);
     }
 }
