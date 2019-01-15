@@ -8,19 +8,21 @@ import org.mockito.Mock;
 public class BinaryTreeTest {
 
     @Mock
-    Node node;
-
-    @Mock
-    BinaryTree binaryTree;
+    BinaryTree binaryTree = new BinaryTree();
 
     @Before
     public void setup(){
-        node = new Node(5);
-        binaryTree = new BinaryTree();
+        binaryTree.addElement(7);
     }
 
     @Test
     public void checkBinaryTreeSize() {
-        Assert.assertEquals(1, binaryTree.getSize(node));
+        Assert.assertEquals(1, binaryTree.getSize());
+    }
+
+    @Test
+    public void addNewElement() {
+        binaryTree.addElement(5);
+        Assert.assertEquals(2, binaryTree.getSize());
     }
 }
