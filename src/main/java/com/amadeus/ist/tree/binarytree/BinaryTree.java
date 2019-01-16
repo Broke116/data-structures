@@ -18,20 +18,15 @@ class BinaryTree {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-
             Node node = (Node) o;
-
-            if (data != node.data) return false;
-            if (left != null ? !left.equals(node.left) : node.left != null) return false;
-            return right != null ? right.equals(node.right) : node.right == null;
+            return data == node.data &&
+                    Objects.equals(left, node.left) &&
+                    Objects.equals(right, node.right);
         }
 
         @Override
         public int hashCode() {
-            int result = data;
-            result = 31 * result + (left != null ? left.hashCode() : 0);
-            result = 31 * result + (right != null ? right.hashCode() : 0);
-            return result;
+            return Objects.hash(data, left, right);
         }
     }
 
@@ -110,6 +105,7 @@ class BinaryTree {
     // DFS - Pre order traversal - recursive approach
 
     List<Integer> preOrderTraversal() {
+        traversal.clear();
         preOrderRecursive(root);
         return traversal;
     }
@@ -126,6 +122,7 @@ class BinaryTree {
 
     // DFS - Pre order traversal - iterative approach
     List<Integer> preOrderTraversalIterative() {
+        traversal.clear();
         preOrderIterative(root);
         return traversal;
     }
@@ -154,5 +151,22 @@ class BinaryTree {
             }
             index++;
         }
+    }
+
+    // DFS - Post order traversal - recursive approach
+    List<Integer> postOrderTraversalRecursive() {
+        traversal.clear();
+        postOrderRecursive(root);
+        return traversal;
+    }
+
+    private void postOrderRecursive(Node root) {
+        if (root.left != null)
+            postOrderRecursive(root.left);
+
+        if (root.right != null)
+            postOrderRecursive(root.right);
+
+        traversal.add(root.data);
     }
 }

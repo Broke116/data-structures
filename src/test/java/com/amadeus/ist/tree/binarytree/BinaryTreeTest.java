@@ -60,4 +60,12 @@ public class BinaryTreeTest {
         traversal = asList(7, 5, 10, 8, 15);
         Assert.assertTrue(binaryTree.preOrderTraversalIterative().equals(traversal));
     }
+
+    /* Implementation of post order traversal (depth first search) of binary tree */
+
+    @Test
+    public void binaryTreePostOrderRecursive() {
+        traversal = asList(5, 8, 15, 10, 7);
+        Assert.assertTrue(binaryTree.postOrderTraversalRecursive().equals(traversal));
+    }
 }
