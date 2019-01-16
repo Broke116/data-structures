@@ -177,37 +177,47 @@ class BinaryTree {
         return traversal;
     }
 
+    /*
+    *            7
+    *        5       10
+    *      4   6     8    15
+    *
+    *    4 6 5 8 15 10 7
+    * */
+
     private void postOrderIterative(Node root) {
         if (root == null)
             return;
 
         Deque<Node> nodeStack = new ArrayDeque<>(); // as sonar and java documentation is concerned Deque shall be used instead of stack. Stack implements Vector interface which uses synchronized block
-        nodeStack.push(root);
+        nodeStack.push(root); // root node must be pushed first. therefore due to the structure of stack, its going to be popped out at last.
 
         Node previous = null;
         while (!nodeStack.isEmpty()) {
-            Node topNode = nodeStack.peek();
-            if (previous == null || previous.left == topNode || previous.right == topNode) {
-                if (topNode.left != null)
-                    nodeStack.push(topNode.left);
-                else if (topNode.right != null)
-                    nodeStack.push(topNode.right);
+            Node currentNode = nodeStack.peek(); // popped out the top value of stack.
+
+            if (previous == null || previous.right == currentNode || previous.left == currentNode) { // used for downward movement through the list
+                if (currentNode.left != null)
+                    nodeStack.push(currentNode.left); // moving to leftmost node first
+                else if (currentNode.right != null)
+                    nodeStack.push(currentNode.right);
                 else {
                     nodeStack.pop();
-                    traversal.add(topNode.data);
+                    traversal.add(currentNode.data);
                 }
-            } else if (topNode.left == previous) {
-                if (topNode.right != null) {
-                    nodeStack.push(topNode.right);
-                } else {
+            } else if (currentNode.left == previous) { // when returning from left node to its parent
+                if (currentNode.right != null)
+                    nodeStack.push(currentNode.right); // if right node is not empty then push into list, as we are going to enter into next right block
+                else { // if there is no right node available, then we are going to popped out the current value of node
                     nodeStack.pop();
-                    traversal.add(topNode.data);
+                    traversal.add(currentNode.data);
                 }
-            } else if (topNode.right == previous) {
+            } else if (currentNode.right == previous) { // when returning from right node to its parent. popped the current value directly as we are going upwards direction
                 nodeStack.pop();
-                traversal.add(topNode.data);
+                traversal.add(currentNode.data);
             }
-            previous = topNode;
+
+            previous = currentNode;
         }
 
     }

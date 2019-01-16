@@ -24,11 +24,13 @@ public class BinaryTreeTest {
         binaryTree.addElement(15);
         binaryTree.addElement(5);
         binaryTree.addElement(8);
+        binaryTree.addElement(4);
+        binaryTree.addElement(6);
     }
 
     @Test
     public void checkBinaryTreeSize() {
-        Assert.assertEquals(5, binaryTree.getSize());
+        Assert.assertEquals(7, binaryTree.getSize());
     }
 
     @Test
@@ -71,7 +73,7 @@ public class BinaryTreeTest {
 
     @Test
     public void binaryTreePostOrderIterative() {
-        traversal = asList(5, 8, 15, 10, 7);
+        traversal = asList(4, 6, 5, 8, 15, 10, 7);
         Assert.assertTrue(binaryTree.postOrderTraversalIterative().equals(traversal));
     }
 }
