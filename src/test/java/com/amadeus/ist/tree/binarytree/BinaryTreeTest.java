@@ -54,4 +54,10 @@ public class BinaryTreeTest {
         traversal = asList(7, 5, 10, 8, 15);
         Assert.assertTrue(binaryTree.preOrderTraversal().equals(traversal));
     }
+
+    @Test
+    public void binaryTreePreOrderIterative() {
+        traversal = asList(7, 5, 10, 8, 15);
+        Assert.assertTrue(binaryTree.preOrderTraversalIterative().equals(traversal));
+    }
 }

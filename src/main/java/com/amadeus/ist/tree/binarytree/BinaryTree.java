@@ -1,7 +1,6 @@
 package com.amadeus.ist.tree.binarytree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class BinaryTree {
     static class Node {
@@ -37,7 +36,7 @@ class BinaryTree {
     }
 
     private Node root;
-    private List<Integer> traversal = new ArrayList<Integer>();
+    private List<Integer> traversal = new ArrayList<>();
 
     // used for returning the size of a binary tree
     int getSize() {
@@ -111,17 +110,49 @@ class BinaryTree {
     // DFS - Pre order traversal - recursive approach
 
     List<Integer> preOrderTraversal() {
-        preOrderTraversalRecursive(root);
+        preOrderRecursive(root);
         return traversal;
     }
 
-    private void preOrderTraversalRecursive(Node root){
+    private void preOrderRecursive(Node root){
         traversal.add(root.data);
 
         if (root.left != null)
-            preOrderTraversalRecursive(root.left);
+            preOrderRecursive(root.left);
 
         if (root.right != null)
-            preOrderTraversalRecursive(root.right);
+            preOrderRecursive(root.right);
+    }
+
+    // DFS - Pre order traversal - iterative approach
+    List<Integer> preOrderTraversalIterative() {
+        preOrderIterative(root);
+        return traversal;
+    }
+
+    private void preOrderIterative(Node root) {
+        if (root == null)
+            return;
+
+        Deque<Node> nodeStack = new ArrayDeque<>(); // as sonar and java documentation is concerned Deque shall be used instead of stack. Stack implements Vector interface which uses synchronized block
+        nodeStack.push(root);
+
+        int index = 0;
+        int treeSize = getSizeRecursive(root);
+
+        while (index < treeSize) {
+            Node topNode = nodeStack.peek();
+            traversal.add(topNode.data);
+            nodeStack.pop();
+
+            if (topNode.right != null) {
+                nodeStack.push(topNode.right);
+            }
+
+            if (topNode.left != null) {
+                nodeStack.push(topNode.left);
+            }
+            index++;
+        }
     }
 }
