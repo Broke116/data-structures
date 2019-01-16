@@ -68,4 +68,10 @@ public class BinaryTreeTest {
         traversal = asList(5, 8, 15, 10, 7);
         Assert.assertTrue(binaryTree.postOrderTraversalRecursive().equals(traversal));
     }
+
+    @Test
+    public void binaryTreePostOrderIterative() {
+        traversal = asList(5, 8, 15, 10, 7);
+        Assert.assertTrue(binaryTree.postOrderTraversalIterative().equals(traversal));
+    }
 }

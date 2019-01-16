@@ -169,4 +169,46 @@ class BinaryTree {
 
         traversal.add(root.data);
     }
+
+    // DFS - Post order traversal - iterative approach
+    List<Integer> postOrderTraversalIterative() {
+        traversal.clear();
+        postOrderIterative(root);
+        return traversal;
+    }
+
+    private void postOrderIterative(Node root) {
+        if (root == null)
+            return;
+
+        Deque<Node> nodeStack = new ArrayDeque<>(); // as sonar and java documentation is concerned Deque shall be used instead of stack. Stack implements Vector interface which uses synchronized block
+        nodeStack.push(root);
+
+        Node previous = null;
+        while (!nodeStack.isEmpty()) {
+            Node topNode = nodeStack.peek();
+            if (previous == null || previous.left == topNode || previous.right == topNode) {
+                if (topNode.left != null)
+                    nodeStack.push(topNode.left);
+                else if (topNode.right != null)
+                    nodeStack.push(topNode.right);
+                else {
+                    nodeStack.pop();
+                    traversal.add(topNode.data);
+                }
+            } else if (topNode.left == previous) {
+                if (topNode.right != null) {
+                    nodeStack.push(topNode.right);
+                } else {
+                    nodeStack.pop();
+                    traversal.add(topNode.data);
+                }
+            } else if (topNode.right == previous) {
+                nodeStack.pop();
+                traversal.add(topNode.data);
+            }
+            previous = topNode;
+        }
+
+    }
 }
