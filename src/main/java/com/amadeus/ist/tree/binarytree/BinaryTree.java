@@ -221,4 +221,21 @@ class BinaryTree {
         }
 
     }
+
+    // DFS - In order traversal (depth first search) recursive approach
+    List<Integer> inOrderTraversalRecursive() {
+        traversal.clear();
+        inOrderRecursive(root);
+        return traversal;
+    }
+
+    private void inOrderRecursive(Node root)  {
+        if (root.left != null)
+            inOrderRecursive(root.left);
+
+        traversal.add(root.data);
+
+        if (root.right != null)
+            inOrderRecursive(root.right);
+    }
 }

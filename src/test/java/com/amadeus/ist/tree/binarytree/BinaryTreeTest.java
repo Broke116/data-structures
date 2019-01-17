@@ -36,7 +36,7 @@ public class BinaryTreeTest {
     @Test
     public void addNewElement() {
         binaryTree.addElement(20);
-        Assert.assertEquals(6, binaryTree.getSize());
+        Assert.assertEquals(8, binaryTree.getSize());
     }
 
     @Test
@@ -53,13 +53,13 @@ public class BinaryTreeTest {
     /* Implementation of pre order traversal (depth first search) of binary tree */
     @Test
     public void binaryTreePreOrderRecursive() {
-        traversal = asList(7, 5, 10, 8, 15);
+        traversal = asList(7, 5, 4, 6, 10, 8, 15);
         Assert.assertTrue(binaryTree.preOrderTraversal().equals(traversal));
     }
 
     @Test
     public void binaryTreePreOrderIterative() {
-        traversal = asList(7, 5, 10, 8, 15);
+        traversal = asList(7, 5, 4, 6, 10, 8, 15);
         Assert.assertTrue(binaryTree.preOrderTraversalIterative().equals(traversal));
     }
 
@@ -67,7 +67,7 @@ public class BinaryTreeTest {
 
     @Test
     public void binaryTreePostOrderRecursive() {
-        traversal = asList(5, 8, 15, 10, 7);
+        traversal = asList(4, 6, 5, 8, 15, 10, 7);
         Assert.assertTrue(binaryTree.postOrderTraversalRecursive().equals(traversal));
     }
 
@@ -76,4 +76,11 @@ public class BinaryTreeTest {
         traversal = asList(4, 6, 5, 8, 15, 10, 7);
         Assert.assertTrue(binaryTree.postOrderTraversalIterative().equals(traversal));
     }
+
+    /* Implementation of in order traversal (depth first search) of binary tree */
+     @Test
+    public void binaryTreeInOrderRecursive() {
+         traversal = asList(4, 5, 6, 7, 8, 10, 15);
+         Assert.assertTrue(binaryTree.inOrderTraversalRecursive().equals(traversal));
+     }
 }
