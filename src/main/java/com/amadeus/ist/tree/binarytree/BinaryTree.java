@@ -273,5 +273,28 @@ class BinaryTree {
             }
         }
     }
+
+    // printing the specific view of binary tree
+    List<Integer> printView(String type) {
+        traversal.clear();
+
+        if (type.equals("right")) {
+            Node topNode = root;
+
+            while(topNode != null) {
+                traversal.add(topNode.data);
+                topNode = topNode.right;
+            }
+        } else if (type.equals("left")) {
+            Node topNode = root;
+
+            while(topNode != null) {
+                traversal.add(topNode.data);
+                topNode = topNode.left;
+            }
+        }
+
+        return traversal;
+    }
 }
 
