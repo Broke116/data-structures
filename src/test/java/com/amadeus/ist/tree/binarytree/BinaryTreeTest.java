@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Arrays.sort;
 
 public class BinaryTreeTest {
 
@@ -78,9 +79,15 @@ public class BinaryTreeTest {
     }
 
     /* Implementation of in order traversal (depth first search) of binary tree */
-     @Test
+    @Test
     public void binaryTreeInOrderRecursive() {
          traversal = asList(4, 5, 6, 7, 8, 10, 15);
          Assert.assertTrue(binaryTree.inOrderTraversalRecursive().equals(traversal));
      }
+
+    @Test
+    public void binaryTreeInOrderIterative() {
+        traversal = asList(4, 5, 6, 7, 8, 10, 15);
+        Assert.assertTrue(binaryTree.inOrderTraversalIterative().equals(traversal));
+    }
 }

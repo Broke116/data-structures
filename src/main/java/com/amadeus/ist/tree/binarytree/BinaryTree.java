@@ -222,6 +222,13 @@ class BinaryTree {
 
     }
 
+    /*            7
+     *        5       10
+     *      4   6     8    15
+     *
+     *      4 5 6 7 8 10 15
+     * */
+
     // DFS - In order traversal (depth first search) recursive approach
     List<Integer> inOrderTraversalRecursive() {
         traversal.clear();
@@ -238,4 +245,33 @@ class BinaryTree {
         if (root.right != null)
             inOrderRecursive(root.right);
     }
+
+    // DFS - In order traversal (depth first search) iterative approach
+    List<Integer> inOrderTraversalIterative() {
+        traversal.clear();
+        inOrderIterative(root);
+        return traversal;
+    }
+
+    // inside loop move down to the leftmost leaf node of tree. while going down push nodes into stack. unless you encounter an empty left node then stop
+    // pop the latest value of stack. then traverse through the right nodes of tree
+    private void inOrderIterative(Node root)  {
+        if (root == null)
+            return;
+
+        Deque<Node> nodeStack = new ArrayDeque<>();
+        Node topNode = root;
+
+        while (!nodeStack.isEmpty() || topNode != null) {
+            if (topNode != null) {
+                nodeStack.push(topNode);
+                topNode = topNode.left;
+            } else {
+                topNode = nodeStack.pop();
+                traversal.add(topNode.data);
+                topNode = topNode.right;
+            }
+        }
+    }
 }
+
